@@ -1,5 +1,6 @@
 body{
   font-family:'Roboto', sans-serif;
+  background-color:#f9f9f9;
 }
 
 .navbar{
@@ -25,4 +26,24 @@ body{
   font-size:1em;
   display:flex;
   float:left;
+}
+
+.description{
+margin-left:15%;
+
+}
+
+.btn-default{
+  border-color:#ffffff;
+}
+
+.btn-group{
+  margin-left:auto;
+  margin-right:auto;
+  width:60%;
+}
+
+.btn{
+  background-color:#00bfa5;
+  color:#ffffff;
 }
