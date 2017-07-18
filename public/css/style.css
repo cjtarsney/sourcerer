@@ -1,0 +1,28 @@
+body{
+  font-family:'Roboto', sans-serif;
+}
+
+.navbar{
+  font-family:'Roboto Slab',serif;
+  background-color:#2195f2;
+  color:#ffffff;
+  margin-top:1%;
+}
+
+.navbar-brand>img{
+  height:200%;
+}
+
+.header-title{
+  padding:0% 1%;
+  font-weight:bold;
+  font-size:1.75em;
+  line-height:2.75em;
+  display:flex;
+}
+
+.subheader{
+  font-size:1em;
+  display:flex;
+  float:left;
+}

@@ -1,0 +1,32 @@
+{
+  "name":"sourcerer",
+  "version":"0.1.0",
+  "description":"Generate and store sourced URLs for campaigns",
+  "main":"index.js",
+  "scripts":{
+    "start":"node index.js"
+  },
+  "dependencies":{
+    "express":"*",
+    "request":"*",
+    "connect":"*",
+    "json2csv":"*",
+    "ws":"*",
+    "async": "*",
+    "dotenv":"*"
+
+  },
+  "engines":{
+    "node":"6.x"
+  },
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/cjtarsney/sourcerer"
+  },
+  "keywords":[
+    "email",
+    "source",
+    "sourcing"
+  ],
+  "license":"MIT"
+}
