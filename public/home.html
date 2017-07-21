@@ -16,7 +16,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
               <img src="logo.png">
             </a>
             <div class="header-title">
@@ -88,12 +88,12 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medium <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a class="options" href="#">Ads</a></li>
-            <li><a class="options" href="#">Email</a></li>
-            <li><a class="options" href="#">Referral</a></li>
-            <li><a class="options" href="#">SMS</a></li>
-            <li><a class="options" href="#">Social</a></li>
+          <ul class="dropdown-menu" id="medium">
+            <li value="ads"><a class="options">Ads</a></li>
+            <li value="email"><a class="options">Email</a></li>
+            <li value="referral"><a class="options">Referral</a></li>
+            <li value="sms"><a class="options">SMS</a></li>
+            <li value="social"><a class="options">Social</a></li>
           </ul>
         </div><!-- /btn-group -->
         <input type="text" class="param form-control" id="medium" aria-label="...">
@@ -115,16 +115,16 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a class="options" href="#">BSD</a></li>
-            <li><a class="options" href="#">Mailchimp</a></li>
-            <li><a class="options" href="#">NGP</a></li>
+          <ul class="dropdown-menu" id="source">
+            <li value="bsd"><a class="options">BSD</a></li>
+            <li value="mc"><a class="options">Mailchimp</a></li>
+            <li value="ngp"><a class="options">NGP</a></li>
             <li role="separator" class="divider"></li>
-            <li><a class="options" href="#">Facebook</a></li>
-            <li><a class="options" href="#">Instagram</a></li>
-            <li><a class="options" href="#">Twitter</a></li>
+            <li value="fb"><a class="options">Facebook</a></li>
+            <li value="ig"><a class="options">Instagram</a></li>
+            <li value="tw"><a class="options">Twitter</a></li>
             <li role="separator" class="divider"></li>
-            <li><a class="options" href="#">Hustle</a></li>
+            <li value="hustle"><a class="options">Hustle</a></li>
           </ul>
         </div><!-- /btn-group -->
         <input type="text" class="param form-control" id="source" aria-label="...">
@@ -146,15 +146,15 @@
       <div class="input-group">
         <div class="input-group-btn">
           <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campaign <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a class="options" href="#">Fundraising</a></li>
-            <li><a class="options" href="#">Listbuilding</a></li>
-            <li><a class="options" href="#">Messaging</a></li>
+          <ul class="dropdown-menu" id="campaign">
+            <li value="fr"><a class="options">Fundraising</a></li>
+            <li value="lb"><a class="options">Listbuilding</a></li>
+            <li value="msg"><a class="options">Messaging</a></li>
             <li role="separator" class="divider"></li>
-            <li><a class="options" href="#">Environment</a></li>
-            <li><a class="options" href="#">Education</a></li>
-            <li><a class="options" href="#">Health Care</a></li>
-            <li><a class="options" href="#">Voting Rights</a></li>
+            <li value="enviro"><a class="options">Environment</a></li>
+            <li value="edu"><a class="options">Education</a></li>
+            <li value="health"><a class="options">Health Care</a></li>
+            <li value="voting"><a class="options">Voting Rights</a></li>
           </ul>
         </div><!-- /btn-group -->
         <input type="text" class="param form-control" id="campaign" aria-label="...">
@@ -201,14 +201,14 @@
         <div class="content-group input-group">
         <div class="input-group-btn">
           <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Audience <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a class="options" href="#">Donors</a></li>
-        <li><a class="options" href="#">Non-Donors</a></li>
-        <li><a class="options" href="#">Maxed Donors</a></li>
+      <ul class="dropdown-menu" id="audience">
+        <li value="d"><a class="options">Donors</a></li>
+        <li value="nd"><a class="options">Non-Donors</a></li>
+        <li value="md"><a class="options">Maxed Donors</a></li>
         <li role="separator" class="divider"></li>
-        <li><a class="options" href="#">Volunteers</a></li>
-        <li><a class="options" href="#">Volunteer Leaders</a></li>
-        <li><a class="options" href="#">Event Attendees</a></li>
+        <li value="vol"><a class="options">Volunteers</a></li>
+        <li value="vl"><a class="options">Volunteer Leaders</a></li>
+        <li value="attnd"><a class="options">Event Attendees</a></li>
       </ul>
     </div><!-- /btn-group -->
     <input type="text" class="param content-form form-control" id="audience" aria-label="Abbreviation">

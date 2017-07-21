@@ -99,4 +99,12 @@ $("#copy").on("click",function(){
   document.execCommand("copy");
 })
 
+$(".dropdown-menu>li").on("click",function(idx,elem){
+  var id = $(this).parent().attr("id");
+  var value = $(this).attr("value");
+  $(".param#"+id).attr("value",value);
+  $("#url-holder").text(updateURL());
+
+})
+
 })
