@@ -81,12 +81,12 @@ return "https://"+unsourcedURL+"/?"+tools.map(function(d){
 
 
   $(".input-group>input").on("change",function(){
-    $("#url-holder").attr("value", updateURL());
+    $("#url-holder").text(updateURL());
   })
 
   $("#tool-select>.btn-group>.tool-select").on("click",function(){
     setTimeout(function(){
-      $("#url-holder").attr("value",updateURL());
+      $("#url-holder").text(updateURL());
     },300)
   })
 
