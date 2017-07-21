@@ -74,7 +74,7 @@ console.log(params);
 
 return "https://"+unsourcedURL+"/?"+tools.map(function(d){
   return paramFunctions[d](params)
-}).join("&")
+}).join("&").replace(/ /g,"-")
 
   }
 
