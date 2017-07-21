@@ -29,21 +29,118 @@ body{
 }
 
 .description{
-margin-left:15%;
-
+margin-left:11%;
+font-size:10.5pt;
+font-weight:bold;
 }
 
-.btn-default{
-  border-color:#ffffff;
+.subdescription{
+margin-left:15%;
+margin-right:15%;
+font-size:8.5pt;
+font-style:italic;
 }
 
 .btn-group{
   margin-left:auto;
   margin-right:auto;
-  width:60%;
+  width:75%;
+
 }
 
 .btn{
+  border-color:#ffffff;
   background-color:#00bfa5;
   color:#ffffff;
+}
+
+.btn-default:hover{
+  background-color:#008e76;
+  color:#ffffff;
+  border-color:#008e76;
+}
+
+.btn-default:active{
+  background-color:#008e76 !important;
+  color:#ffffff;
+  font-weight:bold !important;
+  border-color:#008e76;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default{
+  background-color:#008e76 !important;
+  color:#ffffff !important;
+  font-weight:bold !important;
+
+}
+
+.btn-default:focus{
+  background-color:#008e76;
+  color:#ffffff;
+  font-weight:bold;
+}
+
+.input-group:not(.content-group){
+  margin:auto;
+  width:50%;
+}
+
+.content-group{
+  width:400px !important;
+  float:left !important;
+
+}
+
+.options:hover{
+  background-color:#00bfa5 !important;
+  color:#ffffff !important;
+}
+
+.dropdown-toggle{
+  border-color:#00bfa5;
+  border-width:thin;
+  width:100px;
+}
+
+.well{
+  margin:0% 25%;
+  background-color:#ffffff;
+  word-wrap:break-word;
+}
+
+.input-group-addon{
+  border-color:#00bfa5;
+  background-color:#00bfa5;
+  color:#ffffff;
+  width:100px !important;
+}
+
+.copy{
+  background-color:#2195f2;
+  color:#ffffff;
+}
+
+.copy:hover{
+  background-color:#0069c0;
+}
+
+.copy.active, .copy:active, .copy:visited, .copy:focus, .open>.dropdown-toggle.copy{
+  background-color:#0069c0 !important;
+  color:#ffffff !important;
+  font-weight:bold !important;
+
+}
+
+.center{
+  margin:0% 30%;
+}
+
+.content-form{
+  width:225px !important;
+}
+
+
+.focus{
+  background-color:#00bfa5 !important;
+  color:#ffffff !important;
 }

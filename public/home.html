@@ -1,9 +1,15 @@
 <html>
   <head>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins|Roboto|Roboto+Slab" rel="stylesheet">
+    <script type="text/javascript" src="./js/sourcerer.js"></script>
+
   </head>
 
   <body>
@@ -21,24 +27,218 @@
         </div>
     </nav>
 
+<div class="container-fluid">
+
     <div class="description">
       What tools need to be able to read your URL sourcing?
     </div>
   </br>
 
-    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group btn-group-justified" id="tool-select" data-toggle="buttons" role="group" aria-label ="...">
 
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default">Google Analytics</button>
+        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="google-analytics" value="google-analytics">Google Analytics</label>
       </div>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default">Blue State Digital</button>
+        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="bsd" value="bsd">Blue State Digital</label>
       </div>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default">Act Blue</button>
+        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="actblue" value="actblue">ActBlue</label>
+      </div>
+      <div class="btn-group" role="group">
+        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="digital8" value="digital8">Digital8</label>
+      </div>
+      <div class="btn-group" role="group">
+        <label type="checkbox" data-toggle="collapse" data-target="moreInfo" name="tools" id="other" class="btn btn-default">Something Else</label>
       </div>
     </div>
 
+  <br>
+  <br>
+
+
+  <div class="description">
+    What's your base URL?
+  </div>
+  <div class="subdescription">
+    Insert the plain, unsourced URL that you want to send people to.
+  </div>
+
+  <br>
+
+<div class="row">
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon3">https://</span>
+    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  </div>
+</div>
+
+  <br>
+
+  <div class="description">
+    What medium is the link being distributed through?
+  </div>
+  <div class="subdescription">
+    Choose from the dropdown, or type your own.
+  </div>
+
+  <br>
+
+  <div class="row">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Medium <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a class="options" href="#">Ads</a></li>
+            <li><a class="options" href="#">Email</a></li>
+            <li><a class="options" href="#">Referral</a></li>
+            <li><a class="options" href="#">SMS</a></li>
+            <li><a class="options" href="#">Social</a></li>
+          </ul>
+        </div><!-- /btn-group -->
+        <input type="text" class="param form-control" id="medium" aria-label="...">
+      </div><!-- /input-group -->
+  </div><!-- /row -->
+
+  <br>
+
+  <div class="description">
+    What platform is the link being distributed through?
+  </div>
+  <div class="subdescription">
+    Choose from the dropdown, or type your own.
+  </div>
+
+  <br>
+
+  <div class="row">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a class="options" href="#">BSD</a></li>
+            <li><a class="options" href="#">Mailchimp</a></li>
+            <li><a class="options" href="#">NGP</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="options" href="#">Facebook</a></li>
+            <li><a class="options" href="#">Instagram</a></li>
+            <li><a class="options" href="#">Twitter</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="options" href="#">Hustle</a></li>
+          </ul>
+        </div><!-- /btn-group -->
+        <input type="text" class="param form-control" id="source" aria-label="...">
+      </div><!-- /input-group -->
+  </div><!-- /row -->
+
+  <br>
+
+  <div class="description">
+    What campaign is the link part of?
+  </div>
+  <div class="subdescription">
+    Campaigns can be organized around ask type, issue area, or any other useful (consistent) framework that helps group links over time. Choose from the dropdown, or type your own.
+  </div>
+
+  <br>
+
+  <div class="row">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campaign <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a class="options" href="#">Fundraising</a></li>
+            <li><a class="options" href="#">Listbuilding</a></li>
+            <li><a class="options" href="#">Messaging</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a class="options" href="#">Environment</a></li>
+            <li><a class="options" href="#">Education</a></li>
+            <li><a class="options" href="#">Health Care</a></li>
+            <li><a class="options" href="#">Voting Rights</a></li>
+          </ul>
+        </div><!-- /btn-group -->
+        <input type="text" class="param form-control" id="campaign" aria-label="...">
+      </div><!-- /input-group -->
+  </div><!-- /row -->
+
+  <br>
+
+  <div class="description">
+    What is the specific "send" this link going to be in?
+  </div>
+  <div class="subdescription">
+    Enter the send date, sender, subject, and audience below.
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <div class="content-group input-group">
+      <span class="input-group-addon">Date</span>
+      <input type="date" class="param content-form form-control" id="date" aria-label="YYYYMMDD">
+    </div>
+    </div>
+    <div class="col-md-3">
+      <div class="content-group input-group">
+      <span class="input-group-addon">Sender</span>
+      <input type="text" class="param content-form form-control" id="sender" aria-label="Initials">
+    </div>
+  </div>
+  </div><!-- /row -->
+
+
+<br>
+    <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <div class="content-group input-group">
+          <span class="input-group-addon">Subject</span>
+          <input type="text" class="param content-form form-control" id="subject" aria-label="No spaces">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="content-group input-group">
+        <div class="input-group-btn">
+          <button type="button" class="dropdown-toggle btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Audience <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a class="options" href="#">Donors</a></li>
+        <li><a class="options" href="#">Non-Donors</a></li>
+        <li><a class="options" href="#">Maxed Donors</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a class="options" href="#">Volunteers</a></li>
+        <li><a class="options" href="#">Volunteer Leaders</a></li>
+        <li><a class="options" href="#">Event Attendees</a></li>
+      </ul>
+    </div><!-- /btn-group -->
+    <input type="text" class="param content-form form-control" id="audience" aria-label="Abbreviation">
+  </div>
+  </div><!-- /row -->
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="well"><b>Here's your URL:</b>
+  <br>
+  <div id="url-holder"></div>
+  <br>
+  <br>
+<div class="center">
+  <button type="button" class="copy btn btn-default" id="test">
+    <span aria-hidden="true"></span> Test URL
+  </button>
+  <button type="button" class="copy btn btn-default" id="copy">
+    <span aria-hidden="true"></span> Copy URL to Clipboard
+  </button>
+</div>
+</div><!-- /well -->
+
+<br>
+<br>
+<br>
+</div>
   </body>
 
 </html>
