@@ -37,19 +37,19 @@
     <div class="btn-group btn-group-justified" id="tool-select" data-toggle="buttons" role="group" aria-label ="...">
 
       <div class="btn-group" role="group">
-        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="google-analytics" value="google-analytics">Google Analytics</label>
+        <label class="tool-select btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="googleanalytics" value="googleanalytics">Google Analytics</label>
       </div>
       <div class="btn-group" role="group">
-        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="bsd" value="bsd">Blue State Digital</label>
+        <label class="tool-select btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="actblue" value="actblue">ActBlue</label>
       </div>
       <div class="btn-group" role="group">
-        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="actblue" value="actblue">ActBlue</label>
+        <label class="tool-select btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="bsd" value="bsd">Blue State Digital</label>
       </div>
       <div class="btn-group" role="group">
-        <label class="btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="digital8" value="digital8">Digital8</label>
+        <label class="tool-select btn btn-default"><input type="checkbox" data-toggle="buttons" name="tools" id="digital8" value="digital8">Digital8</label>
       </div>
       <div class="btn-group" role="group">
-        <label type="checkbox" data-toggle="collapse" data-target="moreInfo" name="tools" id="other" class="btn btn-default">Something Else</label>
+        <label class="tool-select btn btn-default" type="checkbox" data-toggle="collapse" data-target="moreInfo" name="tools" id="other" class="btn btn-default">Something Else</label>
       </div>
     </div>
 
@@ -222,7 +222,14 @@
 
 <div class="well"><b>Here's your URL:</b>
   <br>
-  <div id="url-holder"></div>
+  <br>
+  <div class="row">
+  <div class="col-lg-12">
+      <textarea type="text" class="form-control" id="url-holder" aria-label="..."></textarea>
+    </div>
+
+</div>
+
   <br>
   <br>
 <div class="center">

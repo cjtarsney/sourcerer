@@ -9,20 +9,39 @@ var content = function(contentParams){
     return contentCombine;
 }
 
-var gaParams = function(params){
+var googleanalytics = function(params){
 
-var keys = Object.keys(params).filter(function(d){
+var gaKeys = Object.keys(params).filter(function(d){
     return params[d]!=""&&params[d]!="___"
   }).map(function(d){
     return "utm_"+d+"="+params[d];
   })
 
-return keys.join("&")
+return gaKeys.join("&");
 
 }
 
-var bsdParams
-var abParams
+var bsd = function(params){
+  var sourceOrder=['medium','source','campaign','content']
+  var createSource = sourceOrder.map(function(d){
+        return params[d]
+      }).join("_");
+    return "source="+createSource;
+}
+
+var actblue = function(params){
+  var refCodeOrder=['medium','source','campaign','content']
+  var createRefCode = refCodeOrder.map(function(d){
+        return params[d]
+      }).join("_");
+    return "refcode="+createRefCode;
+}
+
+var paramFunctions = {
+  googleanalytics:googleanalytics,
+  bsd:bsd,
+  actblue:actblue
+}
 
 $(document).ready(function(){
 
@@ -52,19 +71,32 @@ $(document).ready(function(){
 
 params.content=content(contentParams);
 console.log(params);
-console.log(gaParams(params));
 
-$("#url-holder").text("https://"+unsourcedURL+"/?"+gaParams(params))
-
-
-    state.tools=tools;
-    state.params=params;
+return "https://"+unsourcedURL+"/?"+tools.map(function(d){
+  return paramFunctions[d](params)
+}).join("&")
 
   }
 
 
-  $("#test").on("click",function(){
-    updateURL();
+
+  $(".input-group>input").on("change",function(){
+    $("#url-holder").attr("value", updateURL());
   })
+
+  $("#tool-select>.btn-group>.tool-select").on("click",function(){
+    setTimeout(function(){
+      $("#url-holder").attr("value",updateURL());
+    },300)
+  })
+
+$("#test").on("click",function(){
+  window.open(updateURL(),"_blank")
+})
+
+$("#copy").on("click",function(){
+  $("#url-holder").select()
+  document.execCommand("copy");
+})
 
 })

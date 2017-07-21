@@ -41,12 +41,14 @@ font-size:8.5pt;
 font-style:italic;
 }
 
+
 .btn-group{
   margin-left:auto;
   margin-right:auto;
   width:75%;
-
 }
+
+
 
 .btn{
   border-color:#ffffff;
@@ -93,6 +95,7 @@ font-style:italic;
 
 .options:hover{
   background-color:#00bfa5 !important;
+  border-color:#00bfa5 !important;
   color:#ffffff !important;
 }
 
@@ -122,6 +125,7 @@ font-style:italic;
 
 .copy:hover{
   background-color:#0069c0;
+  border-color:#0069c0;
 }
 
 .copy.active, .copy:active, .copy:visited, .copy:focus, .open>.dropdown-toggle.copy{
