@@ -121,6 +121,7 @@ font-style:italic;
 .copy{
   background-color:#2195f2;
   color:#ffffff;
+  font-size:1em !important;
 }
 
 .copy:hover{
@@ -135,9 +136,6 @@ font-style:italic;
 
 }
 
-.center{
-  margin:0% 30%;
-}
 
 .content-form{
   width:225px !important;
@@ -147,4 +145,10 @@ font-style:italic;
 .focus{
   background-color:#00bfa5 !important;
   color:#ffffff !important;
+}
+
+.content-rows{
+  float:none;
+  margin: 0 auto;
+  text-align: center;
 }
