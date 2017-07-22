@@ -116,7 +116,7 @@ $(".dropdown-menu>li").on("click",function(idx,elem){
   var value = $(this).attr("value");
   $(".param#"+id).attr("value",value);
   $("#url-holder").text(updateURL());
-
+  $("#url-holder").val(updateURL());
 })
 
 })
