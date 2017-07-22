@@ -86,10 +86,10 @@ font-style:italic;
 }
 
 .content-group{
-  width:400px !important;
-  margin-bottom: 4;
+  width:300px !important;
+  margin: 4 auto;
+  margin-top:0;
   float:none;
-  text-align:center;
 }
 
 .options:hover{
