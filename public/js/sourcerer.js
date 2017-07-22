@@ -37,10 +37,19 @@ var actblue = function(params){
     return "refcode="+createRefCode;
 }
 
+var digital8 = function(params){
+  var msOrder=['medium','source','campaign','content']
+  var createMemberSource = msOrder.map(function(d){
+        return params[d]
+      }).join("_");
+    return "ms="+createMemberSource;
+}
+
 var paramFunctions = {
   googleanalytics:googleanalytics,
   bsd:bsd,
-  actblue:actblue
+  actblue:actblue,
+  digital8:digital8
 }
 
 $(document).ready(function(){
@@ -82,16 +91,19 @@ return "https://"+unsourcedURL+"/?"+tools.map(function(d){
 
   $(".input-group>input").on("change",function(){
     $("#url-holder").text(updateURL());
+    $("#url-holder").val(updateURL());
   })
 
   $("#tool-select>.btn-group>.tool-select").on("click",function(){
     setTimeout(function(){
       $("#url-holder").text(updateURL());
+      $("#url-holder").val(updateURL());
+
     },300)
   })
 
 $("#test").on("click",function(){
-  window.open(updateURL(),"_blank")
+  window.open($("#url-holder").val(),"_blank")
 })
 
 $("#copy").on("click",function(){
