@@ -75,7 +75,6 @@ $(document).ready(function(){
       var id = $(elem).attr("id");
       var value = $(elem).val();
       contentParams[id]=value
-
     }).get();
 
 params.content=content(contentParams);
@@ -114,7 +113,8 @@ $("#copy").on("click",function(){
 $(".dropdown-menu>li").on("click",function(idx,elem){
   var id = $(this).parent().attr("id");
   var value = $(this).attr("value");
-  $(".param#"+id).attr("value",value);
+  $(".param#"+id).text(value);
+  $(".param#"+id).val(value);
   $("#url-holder").text(updateURL());
   $("#url-holder").val(updateURL());
 })

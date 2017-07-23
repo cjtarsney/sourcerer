@@ -41,7 +41,6 @@ font-size:8.5pt;
 font-style:italic;
 }
 
-
 .btn-group{
   margin-left:auto;
   margin-right:auto;
@@ -132,14 +131,11 @@ font-style:italic;
   background-color:#0069c0 !important;
   color:#ffffff !important;
   font-weight:bold !important;
-
 }
-
 
 .content-form{
   width:200px !important;
 }
-
 
 .focus{
   background-color:#00bfa5 !important;
