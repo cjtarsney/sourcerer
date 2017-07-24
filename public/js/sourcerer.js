@@ -79,14 +79,30 @@ $(document).ready(function(){
 
 params.content=content(contentParams);
 console.log(params);
+console.log(tools);
+
+var activeToolNames = $("#tool-select>.btn-group>label.active").map(function(idx,elem){
+  return $(elem).text();
+}).get();
+
+state.tools=activeToolNames;
+console.log(state.tools);
 
 return ("http://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/http:\/\/https:\//g,"https://").replace(/http:\/\/http:\//g,"http://") +tools.map(function(d){
   return paramFunctions[d](params)
 }).join("&").replace(/ /g,"-")
 
+
+
+
   }
 
+  var activeToolNames = $("#tool-select>.btn-group>label.active").map(function(idx,elem){
+    return $(elem).text();
+  }).get();
 
+  state.tools=activeToolNames;
+  $("#selected-tools").text("Here's your URL, which includes sourcing for "+state.tools.join(" / ")+":");
 
   $(".input-group>input").on("change",function(){
     $("#url-holder").text(updateURL());
@@ -97,6 +113,7 @@ return ("http://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/http:\/\/h
     setTimeout(function(){
       $("#url-holder").text(updateURL());
       $("#url-holder").val(updateURL());
+      $("#selected-tools").text("Here's your URL, which includes sourcing for "+state.tools.join(" / ")+":");
 
     },300)
   })
@@ -118,5 +135,7 @@ $(".dropdown-menu>li").on("click",function(idx,elem){
   $("#url-holder").text(updateURL());
   $("#url-holder").val(updateURL());
 })
+
+
 
 })
