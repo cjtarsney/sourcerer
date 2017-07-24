@@ -80,7 +80,7 @@ $(document).ready(function(){
 params.content=content(contentParams);
 console.log(params);
 
-return ("https://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/https:\/\/https:\//g,"https://") +tools.map(function(d){
+return ("http://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/http:\/\/https:\//g,"http://").replace(/http:\/\/http:\//g,"http://") +tools.map(function(d){
   return paramFunctions[d](params)
 }).join("&").replace(/ /g,"-")
 
