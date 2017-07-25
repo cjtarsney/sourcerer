@@ -88,9 +88,15 @@ var activeToolNames = $("#tool-select>.btn-group>label.active").map(function(idx
 state.tools=activeToolNames;
 console.log(state.tools);
 
-return ("http://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/http:\/\/https:\//g,"https://").replace(/http:\/\/http:\//g,"http://") +tools.map(function(d){
+if(unsourcedURL.includes("?")){
+return ("http://"+(unsourcedURL+"&").replace(/\/\//g, '/')).replace(/http:\/\/https:\//g,"https://").replace(/http:\/\/http:\//g,"http://") +tools.map(function(d){
   return paramFunctions[d](params)
-}).join("&").replace(/ /g,"-")
+}).join("&").replace(/ /g,"-");
+} else {
+  return ("http://"+(unsourcedURL+"/?").replace(/\/\//g, '/')).replace(/http:\/\/https:\//g,"https://").replace(/http:\/\/http:\//g,"http://") +tools.map(function(d){
+    return paramFunctions[d](params)
+  }).join("&").replace(/ /g,"-");
+}
 
 
 
