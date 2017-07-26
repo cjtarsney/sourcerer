@@ -126,11 +126,13 @@ return ("http://"+(unsourcedURL+"&").replace(/\/\//g, '/')).replace(/http:\/\/ht
 
 $("#test").on("click",function(){
   window.open($("#url-holder").val(),"_blank")
+  ga('send', 'event', 'test', 'click', 'URL Tested');
 })
 
 $("#copy").on("click",function(){
   $("#url-holder").select()
   document.execCommand("copy");
+  ga('send', 'event', 'copy', 'click', 'URL Copied');
 })
 
 $(".dropdown-menu>li").on("click",function(idx,elem){
