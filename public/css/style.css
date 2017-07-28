@@ -29,6 +29,45 @@ body{
   float:left;
 }
 
+.navbar-nav>li>a{
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.navbar-right{
+  vertical-align: middle !important;
+  float:right;
+  display:block;
+  padding: 0% 0%;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background-color:#2195f2;
+}
+
+.glyphicon-menu-hamburger{
+  font-size:1.75em;
+  float:right;
+  display:flex;
+  padding-right:1%;
+  vertical-align: middle;
+  color: #ffffff;
+  line-height: 2.75em;
+  min-height: 2.75em;
+  margin:0;
+}
+
+.settings{
+  font-size:1.25em;
+  font-family:Roboto;
+}
+
+.settings:hover{
+  background-color:#2195f2 !important;
+  border-color:#2195f2 !important;
+  color:#ffffff !important;
+}
+
 .description{
 margin-left:11%;
 font-size:10.5pt;
@@ -154,4 +193,61 @@ font-style:italic;
 .link{
   color:#0069c0;
   text-align:center !important;
+}
+
+.account-info{
+  width:30px !important;
+  background-color: #f9f9f9;
+  border-color:#ccc;
+  color: #515151;
+}
+
+
+.omb_login .omb_loginOr .omb_hrOr {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+  text-align: center;
+}
+
+.omb_loginOr .omb_spanOr {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -0.6em;
+	margin-left: -1.5em;
+	background-color: white;
+	width: 3em;
+	text-align: center;
+}
+
+
+.authTitle{
+  font-size:1.5em;
+  text-align:center;
+}
+
+#facebook{
+  background-color:#4267b2;
+  color:#ffffff;
+  border-color:#ffffff;
+}
+
+#facebook:hover, #facebook:active, #facebook:visited, #facebook:focus {
+  background-color:#4267b2 !important;
+  border-color:#4267b2 !important;
+  color:#ffffff !important;
+}
+
+#google{
+  background-color:#EA4335;
+  color:#ffffff;
+  border-color:#ffffff;
+}
+
+#google:hover, #google:active, #google:visited, #google:focus {
+  background-color:#EA4335 !important;
+  border-color:#EA4335 !important;
+  color:#ffffff !important;
 }
