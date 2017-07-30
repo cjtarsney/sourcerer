@@ -145,6 +145,23 @@ font-style:italic;
   width:100px;
 }
 
+.protocol-text{
+  color:#ffffff;
+}
+
+.protocol-text:hover{
+  color:#ffffff;
+  text-decoration: none;
+}
+
+.protocol-options:hover
+{
+  background-color:#00bfa5 !important;
+  border-color:#00bfa5 !important;
+  color:#ffffff !important;
+}
+
+
 .well{
   margin:0% 25%;
   background-color:#ffffff;
@@ -250,4 +267,49 @@ font-style:italic;
   background-color:#EA4335 !important;
   border-color:#EA4335 !important;
   color:#ffffff !important;
+}
+
+.btn-block{
+  width:200px;
+  display:inline-block;
+}
+
+.forgot-password{
+  text-align: center;
+  font-size: .6em;
+}
+
+.remember{
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+}
+
+
+.modal-title{
+  font-family:'Roboto Slab',serif;
+  font-weight: bold;
+}
+
+
+.account-create{
+  width:93% !important;
+  margin-right:3px;
+}
+
+.validate{
+  margin-top:10px;
+
+}
+
+.fa-check{
+  color:#00bfa5;
+}
+
+.fa-times{
+  color:#d32f2f;
+}
+
+.center-message{
+  text-align:center;
 }
