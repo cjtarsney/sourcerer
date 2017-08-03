@@ -12,12 +12,74 @@ var loggedInDropdown = [
       , "data-toggle":"modal"
       , "data-target":"#logged-out-modal"}]
 
-  var loggedOutDropdown = [
-      {label:"Log In"
-        , class:"settings"
-        , id:"login"
-        , "data-toggle":"modal"
-        , "data-target":"#login-modal"}]
+var loggedOutDropdown = [
+    {label:"Log In"
+      , class:"settings"
+      , id:"login"
+      , "data-toggle":"modal"
+      , "data-target":"#login-modal"}]
+
+var mediumDefaults = [
+      {value:"ads"
+        , text:"Ads"},
+      {value:"email"
+        , text:"Email"},
+      {value:"referral"
+        , text:"Referral"},
+      {value:"sms"
+        , text:"SMS"},
+      {value:"social"
+        , text:"Social"}]
+
+var sourceDefaults = [
+      {value:"bsd"
+        , text:"BSD"},
+      {value:"mc"
+        , text:"Mailchimp"},
+      {value:"ngp"
+        , text:"NGP"},
+      {value:"fb"
+        , text:"Facebook"},
+      {value:"ig"
+        , text:"Instagram"},
+      {value:"tw"
+        , text:"Twitter"},
+      {value:"hustle"
+        , text:"Hustle"}]
+
+var campaignDefaults = [
+      {value:"fr"
+        , text:"Fundraising"},
+      {value:"lb"
+        , text:"Listbuilding"},
+      {value:"msg"
+        , text:"Messaging"},
+      {value:"enviro"
+        , text:"Environment"},
+      {value:"edu"
+        , text:"Education"},
+      {value:"health"
+        , text:"Health Care"},
+      {value:"voting"
+        , text:"Voting Rights"}]
+
+var senderDefaults = [{value:""
+        , text: ""}]
+
+var audienceDefaults = [
+      {value:"d"
+        , text:"Donors"},
+      {value:"nd"
+        , text:"Non-Donors"},
+      {value:"md"
+        , text:"Maxed Donors"},
+      {value:"vol"
+        , text:"Volunteers"},
+      {value:"vl"
+        , text:"Volunteer Leaders"},
+      {value:"attnd"
+        , text:"Event Attendees"}]
+
 
 var content = function(contentParams){
   var order=['date','sender','subject','audience']
@@ -197,12 +259,118 @@ $(".protocol-choice>li").on("click",function(idx,elem){
 ;
 })
 
+var mediumSetup = function(options){
+  options.map(function(d){
+    $("#medium-input-row").first().clone().appendTo("#custom-medium-input")
+        .find("#medium-label-input, #medium-tag-input").each(function(input){
+          var key = $(this).attr("data-key")
+          $(this).val(d[key])
+          $(this).text(d[key])
+        })
+  });
+
+  $("#medium-input-row").first().remove();
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+
+  $(".medium-remove-line-button").first().remove();
+}
+
+var sourceSetup = function(options){
+  options.map(function(d){
+    $("#source-input-row").first().clone().appendTo("#custom-source-input")
+        .find("#source-label-input, #source-tag-input").each(function(input){
+          var key = $(this).attr("data-key")
+          $(this).val(d[key])
+          $(this).text(d[key])
+        })
+  });
+
+  $("#source-input-row").first().remove();
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+
+  $(".source-remove-line-button").first().remove();
+}
+
+var campaignSetup = function(options){
+  options.map(function(d){
+    $("#campaign-input-row").first().clone().appendTo("#custom-campaign-input")
+        .find("#campaign-label-input, #campaign-tag-input").each(function(input){
+          var key = $(this).attr("data-key")
+          $(this).val(d[key])
+          $(this).text(d[key])
+        })
+  });
+
+  $("#campaign-input-row").first().remove();
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+
+  $(".campaign-remove-line-button").first().remove();
+}
+
+var senderSetup = function(options){
+  options.map(function(d){
+    $("#sender-input-row").first().clone().appendTo("#custom-sender-input")
+        .find("#sender-label-input, #sender-tag-input").each(function(input){
+          var key = $(this).attr("data-key")
+          $(this).val(d[key])
+          $(this).text(d[key])
+        })
+  });
+
+  $("#sender-input-row").first().remove();
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+
+  $(".sender-remove-line-button").first().remove();
+}
+
+var audienceSetup = function(options){
+  options.map(function(d){
+    $("#audience-input-row").first().clone().appendTo("#custom-audience-input")
+        .find("#audience-label-input, #audience-tag-input").each(function(input){
+          var key = $(this).attr("data-key")
+          $(this).val(d[key])
+          $(this).text(d[key])
+        })
+  });
+
+  $("#audience-input-row").first().remove();
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+
+  $(".audience-remove-line-button").first().remove();
+}
+
+
+
 $("#signup-link>a").on("click", function(){
   $("#login-modal").modal("hide");
 })
 
 $("#login-link>a").on("click", function(){
   $("#signup-modal").modal("hide");
+})
+
+$("#create-new-project").on("click",function(){
+  $("#account-settings-modal").modal("hide");
+  mediumSetup(mediumDefaults);
+  sourceSetup(sourceDefaults);
+  campaignSetup(campaignDefaults);
+  senderSetup(senderDefaults);
+  audienceSetup(audienceDefaults);
 })
 
 $("#new-password-confirm").on("input",function(d){
@@ -306,6 +474,54 @@ $("#user-login").on("click",function(){
   });
 })
 
+$(".remove-line-button").on("click",function(){
+  $(this).parent().parent().parent().remove();
+})
 
+$(".add-medium-button").on("click",function(){
+  $("#medium-input-row").first().clone().appendTo("#custom-medium-input").find("input").val("");
+
+    $(".remove-line-button").on("click",function(){
+      $(this).parent().parent().parent().remove();
+})
+})
+
+$(".add-source-button").on("click",function(){
+$("#source-input-row").first().clone().appendTo("#custom-source-input").find("input").val("");
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+})
+})
+
+$(".add-campaign-button").on("click",function(){
+$("#campaign-input-row").first().clone().appendTo("#custom-campaign-input").find("input").val("");
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+})
+})
+
+
+$(".add-sender-button").on("click",function(){
+$("#sender-input-row").first().clone().appendTo("#custom-sender-input").find("input").val("");
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+})
+})
+
+$(".add-audience-button").on("click",function(){
+$("#audience-input-row").first().clone().appendTo("#custom-audience-input").find("input").val("");
+
+  $(".remove-line-button").on("click",function(){
+    $(this).parent().parent().parent().remove();
+  })
+})
+
+$("nav-tabs>li>a").on("click",function(){
+  console.log("nav tab clicked")
+  $(this).parent().attr("class","active")
+})
 
 })

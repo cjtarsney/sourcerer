@@ -428,7 +428,7 @@
 
   </div>
 </div>
-</div><!--end up sign up modal-->
+</div><!--end of sign up modal-->
 
 <div class="modal" id="logged-out-modal" tabindex="-1" role="dialog" aria-labelledby="logged-out-modal-label">
 <div class="modal-dialog" role="document">
@@ -449,7 +449,7 @@
             <div class="col-xs-12 col-sm-12">
                 <div class="row">
                 <div class="content-rows col-xs-6">
-                <button class="btn btn-primary btn-block" id="close-modal" data-dismiss="modal" >Dismiss</button>
+                <button class="btn btn-primary btn-block" id="close-modal" data-dismiss="modal">Dismiss</button>
               </div>
             </div>
             </div>
@@ -458,7 +458,7 @@
 
   </div>
 </div>
-</div><!--end up logged out settings modal-->
+</div><!--end of logged out settings modal-->
 
 
 <div class="modal" id="account-settings-modal" tabindex="-1" role="dialog" aria-labelledby="settings-modal-label">
@@ -470,49 +470,264 @@
     </div>
     <div class="modal-body">
 
+      <div class="row">
+        <div class="center-message center row">
+          Edit the settings for an existing project:
+        </div>
+        <br>
+        <div class="content-rows col-xs-6">
+          <button type="button" class="btn btn-primary btn-block" id="no-current-project" disabled="disabled">No current projects</button>
+        </div>
+      </div>
+
           <br>
-          <div class="omb_row-sm-offset-3 omb_loginOr">
-            <div class="col-xs-12 col-sm-12">
-              <hr class="omb_hrOr">
-              <span class="omb_spanOr">or</span>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12">
-                <form class="omb_loginForm" autocomplete="off">
-                <div class="input-group" role="group">
-                  <span class="account-info input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                  <input type="email" class="account-create form-control" id="new-username" name="new-username" placeholder="email address">
-                </div>
-                <span class="help-block"></span>
-                <div class="input-group">
-                  <span class="account-info input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                  <input  type="password" class="account-create form-control" id="new-password" name="new-password" placeholder="password">
-                </div>
-                <span class="help-block"></span>
-                <div class="input-group">
-                  <span class="account-info input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                  <input  type="password" class="account-create form-control" id="new-password-confirm" name="new-password-confirm" placeholder="confirm password">
-                  <i class="hidden validate fa fa-check" id="passwords-match" aria-hidden="true"></i>
-                  <i class="hidden validate fa fa-times" id="passwords-mismatch" aria-hidden="true"></i>
-                <span class="help-block"></span>
-                </div>
-                <br>
-                <div class="row">
-                          <div class="content-rows col-xs-6">
-                <button type="button" class="btn btn-primary btn-block" id="create-account" disabled="disabled">Create Account</button>
+          <div class="row omb_row-sm-offset-3 omb_loginOr">
+              <div class="col-xs-12 col-sm-12">
+                  <hr class="omb_hrOr">
+                    <span class="omb_spanOr">or</span>
               </div>
-            </div>
-              </form>
-            </div>
-            </div>
+          </div>
+
           <div class="row">
+            <br>
+            <div class="content-rows col-xs-6">
+              <button type="button" class="btn btn-primary btn-block" id="create-new-project" data-toggle="modal" data-target="#project-settings-modal">Create a new project</button>
+            </div>
           </div>
     </div>
 
   </div>
 </div>
-</div><!--end up account settings modal-->
+</div><!--end of account settings modal-->
+
+
+<div class="modal" id="project-settings-modal" tabindex="-1" role="dialog" aria-labelledby="project-settings-modal-label">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="login-link">Create a new project</h4>
+    </div>
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="description">
+          What's your project's name?
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="input-group">
+            <input type="text" class="form-control" id="project-name" aria-describedby="basic-addon3">
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+
+        <div class="description">
+          What is the default protocol for your URLs?
+        </div>
+        <div class="subdescription">
+          Select https:// or http:// based on the security settings and the default prefix of your website URLs
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="input-group">
+            <input type="text" class="form-control" id="project-protocol" aria-describedby="basic-addon3">
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="description">
+          Set the default options for each component of your URLs:
+        </div>
+
+        <br>
+        <div class="navigation" role="navigation">
+        <ul class="nav nav-tabs nav-justified">
+          <li role="presentation" class="active"><a href="#medium-wrapper" data-toggle="tab">Medium</a></li>
+          <li role="presentation"><a href="#source-wrapper" data-toggle="tab">Source</a></li>
+          <li role="presentation"><a href="#campaign-wrapper" data-toggle="tab">Campaign</a></li>
+          <li role="presentation"><a href="#sender-wrapper" data-toggle="tab">Sender</a></li>
+          <li role="presentation"><a href="#audience-wrapper" data-toggle="tab">Audience</a></li>
+        </ul>
+      </div>
+        <br>
+        <br>
+
+<div class="tab-content">
+<div class="tab-pane active" id="medium-wrapper">
+    <div class="custom-settings-input" id="custom-medium-input">
+
+      <div class="medium-input-row input-row row" id="medium-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="medium-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="medium-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="medium-remove-line-button remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+    </div><!--end of custom medium div-->
+    <div class="row">
+    <div class="content-rows col-xs-12">
+        <div class="add-line col-xs-10 col-xs-offset-2 ">
+          <i class="add-medium-button fa fa-plus-circle" aria-hidden="true"></i>
+            &nbsp;Add another medium
+        </div>
+  </div>
+</div><!-- /row -->
+</div><!--end of medium wrapper-->
+
+<div class="tab-pane settings-wrapper" id="source-wrapper">
+    <div class="custom-settings-input" id="custom-source-input">
+
+      <div class="source-input-row input-row row" id="source-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="source-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="source-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="source-remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+    </div><!--end of custom source div-->
+    <div class="row">
+    <div class="content-rows col-xs-12">
+        <div class="add-line col-xs-10 col-xs-offset-2 ">
+          <i class="add-source-button fa fa-plus-circle" aria-hidden="true"></i>
+            &nbsp;Add another source
+        </div>
+  </div>
+</div><!-- /row -->
+</div><!--end of source wrapper-->
+
+<div class="tab-pane settings-wrapper" id="campaign-wrapper">
+    <div class="custom-settings-input" id="custom-campaign-input">
+
+      <div class="campaign-input-row input-row row" id="campaign-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="campaign-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="campaign-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="campaign-remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+    </div><!--end of custom campaign div-->
+    <div class="row">
+    <div class="content-rows col-xs-12">
+        <div class="add-line col-xs-10 col-xs-offset-2 ">
+          <i class="add-campaign-button fa fa-plus-circle" aria-hidden="true"></i>
+            &nbsp;Add another campaign
+        </div>
+  </div>
+</div><!-- /row -->
+</div><!--end of campaign wrapper-->
+
+
+<div class="tab-pane settings-wrapper" id="sender-wrapper">
+    <div class="custom-settings-input" id="custom-sender-input">
+
+      <div class="sender-input-row input-row row" id="sender-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="sender-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="sender-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="sender-remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+      <div class="sender-input-row input-row row" id="sender-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="sender-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="sender-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="sender-remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+    </div><!--end of custom sender div-->
+    <div class="row">
+    <div class="content-rows col-xs-12">
+        <div class="add-line col-xs-10 col-xs-offset-2 ">
+          <i class="add-sender-button fa fa-plus-circle" aria-hidden="true"></i>
+            &nbsp;Add another sender
+        </div>
+  </div>
+</div><!-- /row -->
+</div><!--end of sender wrapper-->
+
+<div class="tab-pane settings-wrapper" id="audience-wrapper">
+    <div class="custom-settings-input" id="custom-audience-input">
+
+      <div class="audience-input-row input-row row" id="audience-input-row">
+      <div class="center-block content-rows col-xs-12">
+          <div class="col-xs-4 col-xs-offset-2 form-group">
+            <input type="text" class="custom-input-field form-control" id="audience-label-input" data-key="text" aria-label="...">
+          </div>
+          <div class="col-xs-4 form-group">
+            <input type="text" class="custom-input-field form-control" id="audience-tag-input" data-key="value" aria-label="...">
+          </div>
+          <div class="remove-line col-xs-1 form-group">
+            <i class="audience-remove-line-button fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+      </div>
+      </div><!-- /row -->
+
+    </div><!--end of custom audience div-->
+    <div class="row">
+    <div class="content-rows col-xs-12">
+        <div class="add-line col-xs-10 col-xs-offset-2 ">
+          <i class="add-audience-button fa fa-plus-circle" aria-hidden="true"></i>
+            &nbsp;Add another audience
+        </div>
+  </div>
+</div><!-- /row -->
+</div><!--end of audience wrapper-->
+
+</div>
+
+
+</div>
+
+
+    </div>
+
+  </div>
+</div>
+</div><!--end of project settings modal-->
 
 </html>
