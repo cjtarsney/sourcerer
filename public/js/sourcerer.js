@@ -143,6 +143,30 @@ $(document).ready(function(){
     }
   });
 
+  function projectid() {
+    return 'xxxxxxxx4xxxyxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  function generateNewProjectID(projectid,cb) {
+
+    firebase.database().ref('projects/' + projectid).set({
+    projectid: projectid,
+    createdat: Date.now(),
+    protocol: "https://",
+    medium: mediumDefaults,
+    source: sourceDefaults,
+    campaign: campaignDefaults,
+    sender: senderDefaults,
+    audience: audienceDefaults
+
+      }).then(function(){return cb()})
+
+
+
+  }
 
 
   var updateURL = function(){
@@ -259,7 +283,18 @@ $(".protocol-choice>li").on("click",function(idx,elem){
 ;
 })
 
+var projectNameSetup = function(){
+  $("#project-name").val("");
+}
+
+var protocolSetup = function(){
+  $("#protocol-https").attr("class","protocol-select btn btn-default active");
+  $("#protocol-http").attr("class","protocol-select btn btn-default");
+}
+
+
 var mediumSetup = function(options){
+  $("#custom-medium-input").find(".medium-input-row").slice(0,-1).remove()
   options.map(function(d){
     $("#medium-input-row").first().clone().appendTo("#custom-medium-input")
         .find("#medium-label-input, #medium-tag-input").each(function(input){
@@ -279,6 +314,7 @@ var mediumSetup = function(options){
 }
 
 var sourceSetup = function(options){
+$("#custom-source-input").find(".source-input-row").slice(0,-1).remove()
   options.map(function(d){
     $("#source-input-row").first().clone().appendTo("#custom-source-input")
         .find("#source-label-input, #source-tag-input").each(function(input){
@@ -298,6 +334,7 @@ var sourceSetup = function(options){
 }
 
 var campaignSetup = function(options){
+$("#custom-campaign-input").find(".campaign-input-row").slice(0,-1).remove()
   options.map(function(d){
     $("#campaign-input-row").first().clone().appendTo("#custom-campaign-input")
         .find("#campaign-label-input, #campaign-tag-input").each(function(input){
@@ -317,8 +354,9 @@ var campaignSetup = function(options){
 }
 
 var senderSetup = function(options){
+$("#custom-sender-input").find(".sender-input-row").slice(0,-1).remove()
   options.map(function(d){
-    $("#sender-input-row").first().clone().appendTo("#custom-sender-input")
+    $(".sender-input-row").last().clone().appendTo("#custom-sender-input")
         .find("#sender-label-input, #sender-tag-input").each(function(input){
           var key = $(this).attr("data-key")
           $(this).val(d[key])
@@ -326,16 +364,16 @@ var senderSetup = function(options){
         })
   });
 
-  $("#sender-input-row").first().remove();
 
   $(".remove-line-button").on("click",function(){
     $(this).parent().parent().parent().remove();
   })
 
-  $(".sender-remove-line-button").first().remove();
+  $("#sender-input-row").first().find(".sender-remove-line-button").remove();
 }
 
 var audienceSetup = function(options){
+$("#custom-audience-input").find(".audience-input-row").slice(0,-1).remove()
   options.map(function(d){
     $("#audience-input-row").first().clone().appendTo("#custom-audience-input")
         .find("#audience-label-input, #audience-tag-input").each(function(input){
@@ -364,13 +402,106 @@ $("#login-link>a").on("click", function(){
   $("#signup-modal").modal("hide");
 })
 
+
+
 $("#create-new-project").on("click",function(){
   $("#account-settings-modal").modal("hide");
-  mediumSetup(mediumDefaults);
-  sourceSetup(sourceDefaults);
-  campaignSetup(campaignDefaults);
-  senderSetup(senderDefaults);
-  audienceSetup(audienceDefaults);
+  $("#new-project-settings-modal").modal({backdrop: 'static',
+            keyboard: false});
+  var newProjectID = projectid();
+  state.projectid = newProjectID
+
+  generateNewProjectID(newProjectID,function(){
+    firebase.database().ref('projects/'+newProjectID).once("value",function(snapshot){
+      var data = snapshot.val();
+      mediumSetup(data.medium);
+      sourceSetup(data.source);
+      campaignSetup(data.campaign);
+      senderSetup(data.sender);
+      audienceSetup(data.audience);
+      projectNameSetup();
+      protocolSetup();
+
+      $("#project-name").on("input",function(){
+        var projectName = $('#project-name').val()
+        firebase.database().ref('projects/'+newProjectID+'/projectname').set(projectName)
+      })
+
+      $(".protocol-select").on("click",function(){
+        var protocolSelect = $(this).attr("value")
+        firebase.database().ref('projects/'+newProjectID+'/protocol').set(protocolSelect)
+      })
+
+      $(".custom-medium-field").on("input",function(){
+        var mediumSettings = $('.medium-input-row').map(function() {
+          var row = $(this)
+          var item = {};
+          row.find("input").each(function(){
+            var input = $(this)
+            item[input.attr("data-key")]=input.val()
+          })
+          return item
+        }).toArray();
+        firebase.database().ref('projects/'+newProjectID+'/medium').set(mediumSettings);
+      })
+
+      $(".custom-source-field").on("input",function(){
+        var sourceSettings = $('.source-input-row').map(function() {
+          var row = $(this)
+          var item = {};
+          row.find("input").each(function(){
+            var input = $(this)
+            item[input.attr("data-key")]=input.val()
+          })
+          return item
+        }).toArray();
+        firebase.database().ref('projects/'+newProjectID+'/source').set(sourceSettings);
+      })
+
+      $(".custom-campaign-field").on("input",function(){
+        var campaignSettings = $('.campaign-input-row').map(function() {
+          var row = $(this)
+          var item = {};
+          row.find("input").each(function(){
+            var input = $(this)
+            item[input.attr("data-key")]=input.val()
+          })
+          return item
+        }).toArray();
+        firebase.database().ref('projects/'+newProjectID+'/campaign').set(campaignSettings);
+      })
+
+      $(".custom-sender-field").on("input",function(){
+        var senderSettings = $('.sender-input-row').map(function() {
+          var row = $(this)
+          var item = {};
+          row.find("input").each(function(){
+            var input = $(this)
+            item[input.attr("data-key")]=input.val()
+          })
+          return item
+        }).toArray();
+        firebase.database().ref('projects/'+newProjectID+'/sender').set(senderSettings);
+      })
+
+      $(".custom-audience-field").on("input",function(){
+        var audienceSettings = $('.audience-input-row').map(function() {
+          var row = $(this)
+          var item = {};
+          row.find("input").each(function(){
+            var input = $(this)
+            item[input.attr("data-key")]=input.val()
+          })
+          return item
+        }).toArray();
+        firebase.database().ref('projects/'+newProjectID+'/audience').set(audienceSettings);
+      })
+
+    })
+
+  });
+
+
 })
 
 $("#new-password-confirm").on("input",function(d){
@@ -388,21 +519,63 @@ $("#new-password-confirm").on("input",function(d){
 })
 
 var login = function(){
+  state.user = firebase.auth().currentUser
   $("#login-modal").modal('hide');
   $("#signup-modal").modal('hide');
   $("#hamburger-menu>li").remove();
-  loggedInDropdown.map(function(d){
-    $("<li><a></a></li>")
-                      .find("a")
-                      .attr("class",d.class)
-                      .attr("id",d.id)
-                      .attr("value",d.label)
-                      .attr("data-toggle",d["data-toggle"])
-                      .attr("data-target",d["data-target"])
-                      .text(d.label)
-                      .end()
-                      .appendTo($("#hamburger-menu"))
-  });
+
+
+  var userProjects = firebase.database().ref("users/"+state.user.uid+"/projects").once("value",function(projects){
+    var data = projects.val()
+    console.log(projects.val())
+    var userProjects = []
+    Object.keys(data).forEach(function(d){
+      data[d].projectname
+    var project = {label:data[d].projectname
+                  , class:"settings"
+                  , id:data[d].projectid}
+    userProjects.push(project)
+
+
+    })
+
+    userProjects.map(function(d){
+      $("<li><a></a></li>")
+                        .find("a")
+                        .attr("class",d.class)
+                        .attr("id",d.id)
+                        .attr("value",d.label)
+                        .attr("data-toggle",d["data-toggle"])
+                        .attr("data-target",d["data-target"])
+                        .text(d.label)
+                        .end()
+                        .appendTo($("#hamburger-menu"))
+    });
+
+
+        $("<li></li>")
+          .attr("role","separator")
+          .attr("class","divider")
+          .appendTo($("#hamburger-menu"))
+
+    loggedInDropdown.map(function(d){
+      $("<li><a></a></li>")
+                        .find("a")
+                        .attr("class",d.class)
+                        .attr("id",d.id)
+                        .attr("value",d.label)
+                        .attr("data-toggle",d["data-toggle"])
+                        .attr("data-target",d["data-target"])
+                        .text(d.label)
+                        .end()
+                        .appendTo($("#hamburger-menu"))
+    });
+
+})
+
+
+
+
   $("#user-logout").on("click",function(){
     console.log("step one");
     firebase.auth().signOut().then(function() {
@@ -441,7 +614,8 @@ $("#create-account").on("click",function(){
   firebase.auth().createUserWithEmailAndPassword(email, password).then(
     function(user){
       firebase.database().ref('users/' + user.uid).set({
-        email: email
+        email: email,
+        userid: uid
       }).then(function(){
         login()
       })
@@ -461,7 +635,8 @@ $("#user-login").on("click",function(){
   firebase.auth().signInWithEmailAndPassword(email, password).then(
     function(user){
       firebase.database().ref('users/' + user.uid).set({
-        email: email
+        email: email,
+        userid: uid
       }).then(function(){
         login()
       })
@@ -479,49 +654,176 @@ $(".remove-line-button").on("click",function(){
 })
 
 $(".add-medium-button").on("click",function(){
-  $("#medium-input-row").first().clone().appendTo("#custom-medium-input").find("input").val("");
+  $(".medium-input-row").last().clone().appendTo("#custom-medium-input").find("input").val("");
 
     $(".remove-line-button").on("click",function(){
       $(this).parent().parent().parent().remove();
 })
+
+$(".custom-medium-field").on("input",function(){
+  var newProjectID = state.projectid;
+  var mediumSettings = $('.medium-input-row').map(function() {
+    var row = $(this)
+    var item = {};
+    row.find("input").each(function(){
+      var input = $(this)
+      item[input.attr("data-key")]=input.val()
+    })
+    return item
+  }).toArray();
+  console.log(mediumSettings);
+  firebase.database().ref('projects/'+newProjectID+'/medium').set(mediumSettings);
+})
 })
 
 $(".add-source-button").on("click",function(){
-$("#source-input-row").first().clone().appendTo("#custom-source-input").find("input").val("");
+$(".source-input-row").last().clone().appendTo("#custom-source-input").find("input").val("");
 
   $(".remove-line-button").on("click",function(){
     $(this).parent().parent().parent().remove();
+})
+
+$(".custom-source-field").on("input",function(){
+  var newProjectID = state.projectid;
+  var sourceSettings = $('.source-input-row').map(function() {
+    var row = $(this)
+    var item = {};
+    row.find("input").each(function(){
+      var input = $(this)
+      item[input.attr("data-key")]=input.val()
+    })
+    return item
+  }).toArray();
+  firebase.database().ref('projects/'+newProjectID+'/source').set(sourceSettings);
 })
 })
 
 $(".add-campaign-button").on("click",function(){
-$("#campaign-input-row").first().clone().appendTo("#custom-campaign-input").find("input").val("");
+$(".campaign-input-row").last().clone().appendTo("#custom-campaign-input").find("input").val("");
 
   $(".remove-line-button").on("click",function(){
     $(this).parent().parent().parent().remove();
 })
+
+$(".custom-campaign-field").on("input",function(){
+  var newProjectID = state.projectid;
+  var campaignSettings = $('.campaign-input-row').map(function() {
+    var row = $(this)
+    var item = {};
+    row.find("input").each(function(){
+      var input = $(this)
+      item[input.attr("data-key")]=input.val()
+    })
+    return item
+  }).toArray();
+  firebase.database().ref('projects/'+newProjectID+'/campaign').set(campaignSettings);
+})
+
 })
 
 
 $(".add-sender-button").on("click",function(){
-$("#sender-input-row").first().clone().appendTo("#custom-sender-input").find("input").val("");
+$(".sender-input-row").last().clone().appendTo("#custom-sender-input").find("input").val("");
 
   $(".remove-line-button").on("click",function(){
     $(this).parent().parent().parent().remove();
+})
+
+$(".custom-sender-field").on("input",function(){
+  var newProjectID = state.projectid;
+  var senderSettings = $('.sender-input-row').map(function() {
+    var row = $(this)
+    var item = {};
+    row.find("input").each(function(){
+      var input = $(this)
+      item[input.attr("data-key")]=input.val()
+    })
+    return item
+  }).toArray();
+  firebase.database().ref('projects/'+newProjectID+'/sender').set(senderSettings);
 })
 })
 
 $(".add-audience-button").on("click",function(){
-$("#audience-input-row").first().clone().appendTo("#custom-audience-input").find("input").val("");
+$(".audience-input-row").last().clone().appendTo("#custom-audience-input").find("input").val("");
 
   $(".remove-line-button").on("click",function(){
     $(this).parent().parent().parent().remove();
   })
+
+  $(".custom-audience-field").on("input",function(){
+  var newProjectID = state.projectid;
+    var audienceSettings = $('.audience-input-row').map(function() {
+      var row = $(this)
+      var item = {};
+      row.find("input").each(function(){
+        var input = $(this)
+        item[input.attr("data-key")]=input.val()
+      })
+      return item
+    }).toArray();
+    firebase.database().ref('projects/'+newProjectID+'/audience').set(audienceSettings);
+  })
 })
 
-$("nav-tabs>li>a").on("click",function(){
-  console.log("nav tab clicked")
-  $(this).parent().attr("class","active")
+$("#close-create-modal").on("click",function(){
+  $("#save-and-close").modal({backdrop: 'static',
+            keyboard: false});
 })
+
+$("#save").on("click",function(){
+  console.log(state.user)
+  firebase.database().ref('users/'+state.user.uid+"/projects").once("value",function(snapshot){
+    var data = snapshot.val()
+
+      firebase.database().ref('users/'+state.user.uid+"/projects/"+state.projectid).set(
+        {
+          projectid: state.projectid,
+          projectname: $('#project-name').val()
+        })
+
+
+  })
+
+  $("#save-and-close").modal("hide")
+  $("#new-project-settings-modal").modal("hide")
+})
+
+$("#discard").on("click",function(){
+  $("#save-and-close").modal("hide")
+  $("#new-project-settings-modal").modal("hide")
+})
+
+$("#edit").on("click",function(){
+  $("#save-and-close").modal("hide")
+})
+
+//$("nav-tabs>li>a").on("click",function(){
+//  console.log("nav tab clicked")
+//  $(this).parent().attr("class","active")
+//})
+
+
+
+
+
+
+
+
+
+//$("#new-password-confirm").on("input",function(d){
+//  console.log("password entered")
+//  if($("#new-password-confirm").val()===$("#new-password").val()){
+//          $("#passwords-match").attr("class", "validate fa fa-check");
+//          $("#passwords-mismatch").attr("class", "hidden validate fa fa-times");
+//          $("#create-account").attr("disabled",null);
+//        }else{
+//          $("#passwords-match").attr("class", "hidden validate fa fa-check");
+//          $("#passwords-mismatch").attr("class", "validate fa fa-times");
+//          $("#create-account").attr("disabled","true");
+//        }})
+
+
+
 
 })

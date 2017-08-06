@@ -342,3 +342,43 @@ font-style:italic;
   margin-left: -3em;
   cursor: pointer;
 }
+
+.protocol-group{
+  width:40%;
+}
+
+#save-and-close{
+  margin-top:20%;
+}
+
+
+#save{
+  background-color:#2196f3;
+}
+
+#edit{
+  background-color:#00bfa5;
+}
+
+#discard{
+  background-color:#d32f2f;
+}
+
+#save:hover, #save:active, #save.active, #save.focus{
+  background-color:#2196f3 !important;
+  border-color:#2196f3 !important;
+}
+
+#edit:hover, #edit:active, #edit.active, #edit.focus{
+  background-color:#00bfa5 !important;
+  border-color:#00bfa5 !important;
+}
+
+#discard:hover, #discard:active, #discard.active, #discard.focus{
+  background-color:#d32f2f !important;
+  border-color:#d32f2f !important;
+}
+
+.exit-dialog{
+  width:40%;
+}
