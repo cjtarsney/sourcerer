@@ -168,6 +168,8 @@ $(document).ready(function(){
 
   }
 
+
+
   var activeProjectSettings = function(){firebase.database().ref("projects/"+state.activeproject).once("value",function(d){
     var data = d.val()
 
@@ -263,6 +265,112 @@ $(document).ready(function(){
 
   }
 
+var loadProject = function(){  $(".edit-project-select.settings").on("click",function(){
+    console.log("test")
+    var currentProjectID = $(this).attr("id");
+    console.log(currentProjectID)
+    $("#account-settings-modal").modal("hide");
+    $("#new-project-settings-modal").modal({backdrop: 'static',
+              keyboard: false});
+
+    state.projectid = currentProjectID
+
+      firebase.database().ref('projects/'+currentProjectID).once("value",function(snapshot){
+        var data = snapshot.val();
+        mediumSetup(data.medium);
+        sourceSetup(data.source);
+        campaignSetup(data.campaign);
+        senderSetup(data.sender);
+        audienceSetup(data.audience);
+        projectNameSetup(data.projectname);
+        protocolSetup(data.protocol);
+
+        $("#project-name").on("input",function(){
+          var projectName = $('#project-name').val()
+          firebase.database().ref('projects/'+currentProjectID+'/projectname').set(projectName)
+        })
+
+        $(".protocol-select").on("click",function(){
+          var protocolSelect = $(this).attr("value")
+          firebase.database().ref('projects/'+currentProjectID+'/protocol').set(protocolSelect)
+        })
+
+        $(".custom-medium-field").on("input",function(){
+          var mediumSettings = $('.medium-input-row').map(function() {
+            var row = $(this)
+            var item = {};
+            row.find("input").each(function(){
+              var input = $(this)
+              item[input.attr("data-key")]=input.val()
+            })
+            return item
+          }).toArray();
+          firebase.database().ref('projects/'+currentProjectID+'/medium').set(mediumSettings);
+        })
+
+        $(".custom-source-field").on("input",function(){
+          var sourceSettings = $('.source-input-row').map(function() {
+            var row = $(this)
+            var item = {};
+            row.find("input").each(function(){
+              var input = $(this)
+              item[input.attr("data-key")]=input.val()
+            })
+            return item
+          }).toArray();
+          firebase.database().ref('projects/'+currentProjectID+'/source').set(sourceSettings);
+        })
+
+        $(".custom-campaign-field").on("input",function(){
+          var campaignSettings = $('.campaign-input-row').map(function() {
+            var row = $(this)
+            var item = {};
+            row.find("input").each(function(){
+              var input = $(this)
+              item[input.attr("data-key")]=input.val()
+            })
+            return item
+          }).toArray();
+          firebase.database().ref('projects/'+currentProjectID+'/campaign').set(campaignSettings);
+        })
+
+        $(".custom-sender-field").on("input",function(){
+          var senderSettings = $('.sender-input-row').map(function() {
+            var row = $(this)
+            var item = {};
+            row.find("input").each(function(){
+              var input = $(this)
+              item[input.attr("data-key")]=input.val()
+            })
+            return item
+          }).toArray();
+          firebase.database().ref('projects/'+currentProjectID+'/sender').set(senderSettings);
+        })
+
+        $(".custom-audience-field").on("input",function(){
+          var audienceSettings = $('.audience-input-row').map(function() {
+            var row = $(this)
+            var item = {};
+            row.find("input").each(function(){
+              var input = $(this)
+              item[input.attr("data-key")]=input.val()
+            })
+            return item
+          }).toArray();
+          firebase.database().ref('projects/'+currentProjectID+'/audience').set(audienceSettings);
+        })
+
+      })
+
+
+      $(".modal-title.project-settings")
+                .text("Edit your project settings")
+
+  })
+
+
+
+}
 
   var updateURL = function(){
 
@@ -378,8 +486,8 @@ $(".protocol-choice>li").on("click",function(idx,elem){
 ;
 })
 
-var projectNameSetup = function(){
-  $("#project-name").val("");
+var projectNameSetup = function(d){
+    $("#project-name").val(d);
 }
 
 var protocolSetup = function(){
@@ -599,6 +707,8 @@ $("#create-new-project").on("click",function(){
 
 })
 
+
+
 $("#new-password-confirm").on("input",function(d){
   console.log("password entered")
   if($("#new-password-confirm").val()===$("#new-password").val()){
@@ -635,6 +745,7 @@ var logout = function(){
   state.activeproject = "965b4b6448d88f66"
   console.log(state.activeproject)
   activeProjectSettings()
+  window.location.reload()
 }
 
 
@@ -688,16 +799,22 @@ var login = function(){
       userProjects.map(function(d){
         $("<li><a></a></li>")
                           .find("a")
+                          .on("click",loadProject())
                           .attr("class","edit-project-select settings")
                           .attr("id",d.id)
                           .attr("value",d.label)
                           .attr("data-toggle","modal")
-                          .attr("data-target","edit-existing-project-modal")
+                          .attr("data-target","new-project-settings-modal")
                           .text(d.label)
                           .end()
                           .appendTo($("#current-projects-edit-menu"))
-    })
+                              })
+
+
   }
+
+    $("a.edit-project-select").on("click",loadProject())
+
     $("a.user-project").on("click",function(){
 
       $(".dropdown-menu#medium>li").remove();
@@ -730,6 +847,8 @@ var login = function(){
                         .appendTo($("#hamburger-menu"))
     });
 
+
+
     $(".settings#user-logout").on("click",function(){
       console.log("logouttest")
       firebase.auth().signOut().then(function() {
@@ -741,8 +860,6 @@ var login = function(){
     })
 
 })
-
-
 
 }
 
