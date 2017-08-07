@@ -11,6 +11,10 @@ body{
   padding:1px;
 }
 
+.navbar-header{
+  width:90%;
+}
+
 .navbar-brand>img{
   height:200%;
 }
@@ -58,7 +62,7 @@ body{
 }
 
 .settings{
-  font-size:1.25em;
+  cursor: pointer;
   font-family:Roboto;
 }
 
@@ -351,6 +355,9 @@ font-style:italic;
   margin-top:20%;
 }
 
+#forgot-password-modal{
+  margin-top:7%;
+}
 
 #save{
   background-color:#2196f3;
@@ -381,4 +388,15 @@ font-style:italic;
 
 .exit-dialog{
   width:40%;
+}
+
+
+#current-projects-edit-menu{
+    left:16.5%;
+    min-width:200px;
+}
+
+#current-project-dropdown:hover, #current-project-dropdown:active, #current-project-dropdown.active, #current-project-dropdown.focus, #current-project-dropdown:focus, #current-project-dropdown.visited, #current-project-dropdown:visited{
+  background-color:#00bfa5 !important;
+  border-color:#00bfa5 !important;
 }

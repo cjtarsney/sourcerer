@@ -168,6 +168,101 @@ $(document).ready(function(){
 
   }
 
+  var activeProjectSettings = function(){firebase.database().ref("projects/"+state.activeproject).once("value",function(d){
+    var data = d.val()
+
+    console.log(data.protocol)
+
+    if(data.protocol==="https://"){
+      $(".protocol-display")
+                .attr("value","https://")
+                .find("a")
+                .attr("class","protocol-text")
+                .text("https://")
+      $(".protocol-choice.dropdown-menu>li")
+                .attr("value","http://")
+                .find("a")
+                .attr("class","protocol-options")
+                .attr("value","http://")
+                .text("http://")
+    }else{
+      $(".protocol-display")
+                .attr("value","http://")
+                .find("a")
+                .attr("class","protocol-text")
+                .text("http://")
+      $(".protocol-choice.dropdown-menu>li")
+                .attr("value","http://")
+                .find("a")
+                .attr("class","protocol-options")
+                .attr("value","https://")
+                .text("http://")
+    }
+
+    data.medium.map(function(data){
+      $("<li><a></a></li>")
+              .attr("value",data["value"])
+              .find("a")
+              .attr("class","options")
+              .text(data["text"])
+              .end()
+              .appendTo($(".dropdown-menu#medium"))
+
+    })
+
+    data.source.map(function(data){
+      $("<li><a></a></li>")
+              .attr("value",data["value"])
+              .find("a")
+              .attr("class","options")
+              .text(data["text"])
+              .end()
+              .appendTo($(".dropdown-menu#source"))
+
+    })
+
+    data.campaign.map(function(data){
+      $("<li><a></a></li>")
+              .attr("value",data["value"])
+              .find("a")
+              .attr("class","options")
+              .text(data["text"])
+              .end()
+              .appendTo($(".dropdown-menu#campaign"))
+
+    })
+
+    data.sender.map(function(data){
+      $("<li><a></a></li>")
+              .attr("value",data["value"])
+              .find("a")
+              .attr("class","options")
+              .text(data["text"])
+              .end()
+              .appendTo($(".dropdown-menu#sender"))
+
+    })
+
+    data.audience.map(function(data){
+      $("<li><a></a></li>")
+              .attr("value",data["value"])
+              .find("a")
+              .attr("class","options")
+              .text(data["text"])
+              .end()
+              .appendTo($(".dropdown-menu#audience"))
+
+    })
+
+    dropdownPopulateInput()
+
+    $(".navbar-header>.header-title")
+              .text("Sourcerer: "+data.projectname)
+
+  })
+
+  }
+
 
   var updateURL = function(){
 
@@ -252,14 +347,14 @@ $("#copy").on("click",function(){
   ga('send', 'event', 'copy', 'click', 'URL Copied');
 })
 
-$(".dropdown-menu>li").on("click",function(idx,elem){
+var dropdownPopulateInput = function(){$(".dropdown-menu>li").on("click",function(idx,elem){
   var id = $(this).parent().attr("id");
   var value = $(this).attr("value");
   $(".param#"+id).text(value);
   $(".param#"+id).val(value);
   $("#url-holder").text(updateURL());
   $("#url-holder").val(updateURL());
-})
+})}
 
 $(".protocol-choice>li").on("click",function(idx,elem){
   var protocol = $(this).attr("value");
@@ -518,6 +613,31 @@ $("#new-password-confirm").on("input",function(d){
 
 })
 
+
+
+var logout = function(){
+  console.log("logout")
+  $("#hamburger-menu>li").remove();
+  loggedOutDropdown.map(function(d){
+    $("<li><a></a></li>")
+                      .find("a")
+                      .attr("class",d.class)
+                      .attr("id",d.id)
+                      .attr("value",d.label)
+                      .attr("data-toggle",d["data-toggle"])
+                      .attr("data-target",d["data-target"])
+                      .text(d.label)
+                      .end()
+                      .appendTo($("#hamburger-menu"))
+  })
+
+  console.log(state.activeproject)
+  state.activeproject = "965b4b6448d88f66"
+  console.log(state.activeproject)
+  activeProjectSettings()
+}
+
+
 var login = function(){
   state.user = firebase.auth().currentUser
   $("#login-modal").modal('hide');
@@ -532,7 +652,7 @@ var login = function(){
     Object.keys(data).forEach(function(d){
       data[d].projectname
     var project = {label:data[d].projectname
-                  , class:"settings"
+                  , class:"user-project settings"
                   , id:data[d].projectid}
     userProjects.push(project)
 
@@ -550,8 +670,47 @@ var login = function(){
                         .text(d.label)
                         .end()
                         .appendTo($("#hamburger-menu"))
+
+
     });
 
+    if (userProjects != null){
+      console.log(userProjects)
+      $("#current-project-dropdown").attr("class","btn btn-primary btn-block dropdown-toggle")
+      $("#current-project-dropdown").attr("data-toggle","dropdown")
+      $("#current-project-dropdown").attr("disabled",null)
+      $("#current-project-dropdown").text("Select a project ")
+
+      $("<span></span>")
+            .attr("class","caret")
+            .appendTo($("#current-project-dropdown"))
+
+      userProjects.map(function(d){
+        $("<li><a></a></li>")
+                          .find("a")
+                          .attr("class","edit-project-select settings")
+                          .attr("id",d.id)
+                          .attr("value",d.label)
+                          .attr("data-toggle","modal")
+                          .attr("data-target","edit-existing-project-modal")
+                          .text(d.label)
+                          .end()
+                          .appendTo($("#current-projects-edit-menu"))
+    })
+  }
+    $("a.user-project").on("click",function(){
+
+      $(".dropdown-menu#medium>li").remove();
+      $(".dropdown-menu#source>li").remove();
+      $(".dropdown-menu#campaign>li").remove();
+      $(".dropdown-menu#sender>li").remove();
+      $(".dropdown-menu#audience>li").remove();
+      console.log("test")
+      var activeProject = $(this).attr("id")
+      state.activeproject = activeProject
+      activeProjectSettings()
+
+    })
 
         $("<li></li>")
           .attr("role","separator")
@@ -571,38 +730,25 @@ var login = function(){
                         .appendTo($("#hamburger-menu"))
     });
 
+    $(".settings#user-logout").on("click",function(){
+      console.log("logouttest")
+      firebase.auth().signOut().then(function() {
+      logout()
+      }).catch(function(error) {
+      // An error happened.
+    });
+
+    })
+
 })
 
 
 
-
-  $("#user-logout").on("click",function(){
-    console.log("step one");
-    firebase.auth().signOut().then(function() {
-      console.log("step two");
-    logout()
-    }).catch(function(error) {
-    // An error happened.
-  });
-
-  })
 }
 
-var logout = function(){
-  $("#hamburger-menu>li").remove();
-  loggedOutDropdown.map(function(d){
-    $("<li><a></a></li>")
-                      .find("a")
-                      .attr("class",d.class)
-                      .attr("id",d.id)
-                      .attr("value",d.label)
-                      .attr("data-toggle",d["data-toggle"])
-                      .attr("data-target",d["data-target"])
-                      .text(d.label)
-                      .end()
-                      .appendTo($("#hamburger-menu"))
-  })
-}
+
+
+
 
 
 
@@ -798,6 +944,21 @@ $("#edit").on("click",function(){
   $("#save-and-close").modal("hide")
 })
 
+$("#return").on("click",function(){
+  $("#forgot-password-modal").modal("hide")
+})
+
+$(".forgot-password").on("click",function(){
+  var auth = firebase.auth();
+  var emailAddress = $("#username").val();
+
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+  // Email sent.
+  }).catch(function(error) {
+  // An error happened.
+});
+
+})
 //$("nav-tabs>li>a").on("click",function(){
 //  console.log("nav tab clicked")
 //  $(this).parent().attr("class","active")

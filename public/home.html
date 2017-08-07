@@ -304,25 +304,7 @@
         <h4 class="modal-title" id="signup-link">Log In or <a data-toggle="modal" data-target="#signup-modal">Sign Up</a></h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-            <div class="content-rows col-xs-6">
 
-          <a href="#" class="social-login btn btn-default" id="google">
-            Google
-          </a>
-          <a href="#" class="social-login btn btn-default" id="facebook">
-            Facebook
-          </a>
-        </div>
-        </div>
-
-
-            <br>
-            <div class="omb_row-sm-offset-3 omb_loginOr">
-              <div class="col-xs-12 col-sm-12">
-                <span class="omb_spanOr">or</span>
-              </div>
-            </div>
             <br>
             <div class="row">
               <div class="col-xs-12 col-sm-12">
@@ -339,7 +321,7 @@
                   </div>
                   <br>
                   <p class="forgot-password">
-                    <a href="#">Forgot password?</a>
+                    <a href="#" data-toggle="modal" data-target="#forgot-password-modal">Forgot password?</a>
                   </p>
                   <div class="row">
                             <div class="content-rows col-xs-6">
@@ -372,26 +354,8 @@
       <h4 class="modal-title" id="login-link">Sign Up or <a data-toggle="modal" data-target="#login-modal">Log In</a></h4>
     </div>
     <div class="modal-body">
-      <div class="row">
-          <div class="content-rows col-xs-6">
-
-        <a href="#" class="social-login btn btn-default" id="google">
-          Google
-        </a>
-        <a href="#" class="social-login btn btn-default" id="facebook">
-          Facebook
-        </a>
-      </div>
-      </div>
 
 
-          <br>
-          <div class="omb_row-sm-offset-3 omb_loginOr">
-            <div class="col-xs-12 col-sm-12">
-              <hr class="omb_hrOr">
-              <span class="omb_spanOr">or</span>
-            </div>
-          </div>
           <br>
           <div class="row">
             <div class="col-xs-12 col-sm-12">
@@ -476,7 +440,11 @@
         </div>
         <br>
         <div class="content-rows col-xs-6">
-          <button type="button" class="btn btn-primary btn-block" id="no-current-project" disabled="disabled">No current projects</button>
+          <button type="button" class="btn btn-primary btn-block" id="current-project-dropdown" data-toggle="dropdown" disabled="disabled">
+            No current project
+            </button>
+            <ul class="dropdown-menu" id="current-projects-edit-menu"></ul>
+
         </div>
       </div>
 
@@ -766,5 +734,29 @@
   </div>
 </div><!--end of save and close modal-->
 
+
+<div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="forgot-password-modal">
+  <div class="forgot-pw-dialogue modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <br>
+      <div class="description">
+        A password reset email has been sent to the email address you entered. Reset your password and then return to this page.
+      </div>
+      <br>
+      <div class="btn-group btn-group-justified" id="password-reset" data-toggle="buttons" role="group" aria-label ="...">
+
+        <div class="btn-group" role="group">
+          <label class="exit-select btn btn-default" id="return"><input type="checkbox" data-toggle="buttons" name="return" id="return" value="return">Return to Sign-in</label>
+        </div>
+
+
+      </div>
+      <br>
+
+
+
+    </div>
+  </div>
+</div><!--end of forgot password modal-->
 
 </html>
