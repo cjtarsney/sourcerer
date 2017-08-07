@@ -198,7 +198,7 @@ $(document).ready(function(){
                 .find("a")
                 .attr("class","protocol-options")
                 .attr("value","https://")
-                .text("http://")
+                .text("https://")
     }
 
     data.medium.map(function(data){
