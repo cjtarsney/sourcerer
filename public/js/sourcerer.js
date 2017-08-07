@@ -756,6 +756,20 @@ var login = function(){
   $("#hamburger-menu>li").remove();
 
 
+      loggedInDropdown.map(function(d){
+        $("<li><a></a></li>")
+                          .find("a")
+                          .attr("class",d.class)
+                          .attr("id",d.id)
+                          .attr("value",d.label)
+                          .attr("data-toggle",d["data-toggle"])
+                          .attr("data-target",d["data-target"])
+                          .text(d.label)
+                          .end()
+                          .appendTo($("#hamburger-menu"))
+      });
+
+
   var userProjects = firebase.database().ref("users/"+state.user.uid+"/projects").once("value",function(projects){
     var data = projects.val()
     console.log(projects.val())
@@ -786,6 +800,10 @@ var login = function(){
     });
 
     if (userProjects != null){
+      $("<li></li>")
+        .attr("role","separator")
+        .attr("class","divider")
+        .appendTo($("#hamburger-menu"))
       console.log(userProjects)
       $("#current-project-dropdown").attr("class","btn btn-primary btn-block dropdown-toggle")
       $("#current-project-dropdown").attr("data-toggle","dropdown")
@@ -829,23 +847,7 @@ var login = function(){
 
     })
 
-        $("<li></li>")
-          .attr("role","separator")
-          .attr("class","divider")
-          .appendTo($("#hamburger-menu"))
 
-    loggedInDropdown.map(function(d){
-      $("<li><a></a></li>")
-                        .find("a")
-                        .attr("class",d.class)
-                        .attr("id",d.id)
-                        .attr("value",d.label)
-                        .attr("data-toggle",d["data-toggle"])
-                        .attr("data-target",d["data-target"])
-                        .text(d.label)
-                        .end()
-                        .appendTo($("#hamburger-menu"))
-    });
 
 
 
@@ -1050,6 +1052,7 @@ $("#save").on("click",function(){
 
   $("#save-and-close").modal("hide")
   $("#new-project-settings-modal").modal("hide")
+  login()
 })
 
 $("#discard").on("click",function(){
