@@ -769,10 +769,10 @@ var login = function(){
                           .appendTo($("#hamburger-menu"))
       });
 
-      $("<span></span>")
-            .attr("class","caret")
-            .appendTo($("#current-project-dropdown"))
-
+      $("<li></li>")
+        .attr("role","separator")
+        .attr("class","divider")
+        .appendTo($("#hamburger-menu"))
 
   var userProjects = firebase.database().ref("users/"+state.user.uid+"/projects").once("value",function(projects){
     var data = projects.val()
@@ -787,6 +787,10 @@ var login = function(){
 
 
     })
+
+    $("<span></span>")
+          .attr("class","caret")
+          .appendTo($("#current-project-dropdown"))
 
     userProjects.map(function(d){
       $("<li><a></a></li>")
@@ -804,10 +808,7 @@ var login = function(){
     });
 
     if (userProjects != null){
-      $("<li></li>")
-        .attr("role","separator")
-        .attr("class","divider")
-        .appendTo($("#hamburger-menu"))
+
       console.log(userProjects)
       $("#current-project-dropdown").attr("class","btn btn-primary btn-block dropdown-toggle")
       $("#current-project-dropdown").attr("data-toggle","dropdown")
