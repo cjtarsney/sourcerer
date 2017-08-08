@@ -135,6 +135,8 @@ var paramFunctions = {
 
 $(document).ready(function(){
 
+  dropdownPopulateInput()
+
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       login();
