@@ -769,6 +769,10 @@ var login = function(){
                           .appendTo($("#hamburger-menu"))
       });
 
+      $("<span></span>")
+            .attr("class","caret")
+            .appendTo($("#current-project-dropdown"))
+
 
   var userProjects = firebase.database().ref("users/"+state.user.uid+"/projects").once("value",function(projects){
     var data = projects.val()
@@ -810,9 +814,7 @@ var login = function(){
       $("#current-project-dropdown").attr("disabled",null)
       $("#current-project-dropdown").text("Select a project ")
 
-      $("<span></span>")
-            .attr("class","caret")
-            .appendTo($("#current-project-dropdown"))
+
 
       userProjects.map(function(d){
         $("<li><a></a></li>")
