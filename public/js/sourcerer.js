@@ -742,7 +742,7 @@ var logout = function(){
   })
 
   console.log(state.activeproject)
-  state.activeproject = "965b4b6448d88f66"
+  state.activeproject = "06fe71ce4a23b1ae"
   console.log(state.activeproject)
   activeProjectSettings()
   window.location.reload()
