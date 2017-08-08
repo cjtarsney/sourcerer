@@ -135,7 +135,7 @@ var paramFunctions = {
 
 $(document).ready(function(){
 
-  dropdownPopulateInput()
+
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -1068,6 +1068,8 @@ $("#discard").on("click",function(){
 $("#edit").on("click",function(){
   $("#save-and-close").modal("hide")
 })
+
+dropdownPopulateInput()
 
 $("#return").on("click",function(){
   $("#forgot-password-modal").modal("hide")
