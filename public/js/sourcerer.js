@@ -384,6 +384,8 @@ var loadProject = function(){  $(".edit-project-select.settings").on("click",fun
       return $(elem).val();
     }).get();
 
+    var tools = tools.sort().reverse()
+
     var unsourcedURL = $("#basic-url").val();
 
 
