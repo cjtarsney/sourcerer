@@ -110,13 +110,6 @@ var bsd = function(params){
     return "source="+createSource;
 }
 
-var actblue = function(params){
-  var refCodeOrder=['medium','source','campaign','content']
-  var createRefCode = refCodeOrder.map(function(d){
-        return params[d]
-      }).join("_");
-    return "refcode="+createRefCode;
-}
 
 var digital8 = function(params){
   var msOrder=['medium','source','campaign','content']
@@ -126,11 +119,19 @@ var digital8 = function(params){
     return "ms="+createMemberSource;
 }
 
+var actblue = function(params){
+  var refCodeOrder=['medium','source','campaign','content']
+  var createRefCode = refCodeOrder.map(function(d){
+        return params[d]
+      }).join("_");
+    return "refcode="+createRefCode;
+}
+
 var paramFunctions = {
   googleanalytics:googleanalytics,
   bsd:bsd,
-  actblue:actblue,
-  digital8:digital8
+  digital8:digital8,
+  actblue:actblue
 }
 
 $(document).ready(function(){
