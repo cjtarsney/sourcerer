@@ -195,6 +195,23 @@ font-style:italic;
   font-weight:bold !important;
 }
 
+.share{
+  background-color:#673ab7;
+  color:#ffffff;
+  font-size:1em !important;
+}
+
+.share:hover{
+  background-color:#320b86;
+  border-color:#320b86;
+}
+
+.share.active, .share:active, .share:visited, .share:focus, .open>.dropdown-toggle.copy{
+  background-color:#320b86 !important;
+  color:#ffffff !important;
+  font-weight:bold !important;
+}
+
 .content-form{
   width:200px !important;
 }
