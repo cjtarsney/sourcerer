@@ -463,12 +463,18 @@ return ($("#protocol-display>a").text()+(unsourcedURL+"&").replace(/\/\//g, '/')
   $(".input-group>input").on("change",function(){
     $("#url-holder").text(updateURL());
     $("#url-holder").val(updateURL());
+    $("#sharelink-holder").text(updateShareLink());
+    $("#sharelink-holder").val(updateShareLink());
+
+
   })
 
   $("#tool-select>.btn-group>.tool-select").on("click",function(){
     setTimeout(function(){
       $("#url-holder").text(updateURL());
       $("#url-holder").val(updateURL());
+      $("#sharelink-holder").text(updateShareLink());
+      $("#sharelink-holder").val(updateShareLink());
       $("#selected-tools").text("Here's your URL, which includes sourcing for "+state.tools.join(" / ")+":");
 
     },300)
@@ -515,6 +521,8 @@ var dropdownPopulateInput = function(){$(".dropdown-menu>li").on("click",functio
   $(".param#"+id).val(value);
   $("#url-holder").text(updateURL());
   $("#url-holder").val(updateURL());
+  $("#sharelink-holder").text(updateShareLink());
+  $("#sharelink-holder").val(updateShareLink());
 })}
 
 $(".protocol-choice>li").on("click",function(idx,elem){
@@ -536,6 +544,8 @@ $(".protocol-choice>li").on("click",function(idx,elem){
   console.log(protocol);
   $("#url-holder").text(updateURL());
   $("#url-holder").val(updateURL());
+  $("#sharelink-holder").text(updateShareLink());
+  $("#sharelink-holder").val(updateShareLink());
 ;
 })
 
