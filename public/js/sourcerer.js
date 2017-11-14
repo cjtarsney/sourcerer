@@ -110,6 +110,18 @@ var bsd = function(params){
     return "source="+createSource;
 }
 
+var blackbaud = function(params){
+  var srcOrder=['medium','source']
+  var createSRC = srcOrder.map(function(d){
+        return params[d]
+      }).join("_");
+  var subsrcOrder=['campaign','content']
+  var createSubSRC = subsrcOrder.map(function(d){
+        return params[d]
+      }).join("_");
+    return "s_src="+createSRC+"&s_subsrc="+createSubSRC;
+}
+
 
 var digital8 = function(params){
   var msOrder=['medium','source','campaign','content']
@@ -130,6 +142,7 @@ var actblue = function(params){
 var paramFunctions = {
   googleanalytics:googleanalytics,
   bsd:bsd,
+  blackbaud:blackbaud,
   digital8:digital8,
   actblue:actblue
 }
