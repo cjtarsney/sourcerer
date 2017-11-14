@@ -441,6 +441,18 @@ return ($("#protocol-display>a").text()+(unsourcedURL+"&").replace(/\/\//g, '/')
 
   }
 
+  var updateShareLink = function(){
+
+//    var sourcedURL = updateURL().val()
+    var facebookBaseURL = 'https://www.facebook.com/sharer/sharer.php?u='
+
+    return(facebookBaseURL+(($("#url-holder").text()).replace(/&/g,'%26').replace(/:/g,'%3A')))
+
+  ;
+
+  }
+
+
   var activeToolNames = $("#tool-select>.btn-group>label.active").map(function(idx,elem){
     return $(elem).text();
   }).get();
@@ -472,6 +484,29 @@ $("#copy").on("click",function(){
   document.execCommand("copy");
   ga('send', 'event', 'copy', 'click', 'URL Copied');
 })
+
+$("#sharelink").on("click",function(){
+  $("#share-div").attr("class","row")
+  setTimeout(function(){
+    $("#sharelink-holder").text(updateShareLink());
+    $("#sharelink-holder").val(updateShareLink());
+
+  },300)
+
+  ga('send', 'event', 'sharelink', 'click', 'Share Link Created');
+})
+
+$("#fbs-test").on("click",function(){
+  window.open($("#sharelink-holder").val(),"_blank");
+  ga('send', 'event', 'test', 'click', 'URL Tested');
+})
+
+$("#fbs-copy").on("click",function(){
+  $("#sharelink-holder").select()
+  document.execCommand("copy");
+  ga('send', 'event', 'copy', 'click', 'URL Copied');
+})
+
 
 var dropdownPopulateInput = function(){$(".dropdown-menu>li").on("click",function(idx,elem){
   var id = $(this).parent().attr("id");
